@@ -37,4 +37,21 @@ export async function middleware(req, res) {
 
     return response;
   }
+
+  // redirect to prefixed default-local
+  if (
+    req.nextUrl.pathname.startsWith("/_next") ||
+    req.nextUrl.pathname.includes("/api/") ||
+    PUBLIC_FILE.test(req.nextUrl.pathname)
+  ) {
+    return;
+  }
+
+  const search = req.nextUrl.search?.length ? req.nextUrl.search : "";
+
+  if (req.nextUrl.locale === "default") {
+    return NextResponse.redirect(
+      new URL(`/de-DE${req.nextUrl.pathname}${search}`, req.url)
+    );
+  }
 }

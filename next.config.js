@@ -29,6 +29,12 @@ const securityHeaders = [
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  i18n: {
+    locales: ["default", "de-DE", "en-DE"],
+    defaultLocale: "default",
+    localeDetection: true,
+  },
+
   async headers() {
     return [
       {
